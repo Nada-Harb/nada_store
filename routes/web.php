@@ -30,17 +30,12 @@ Route::group([
     'controller' => CategoriesController::class, //laravel 9
 ], function(){
 
-    Route::get('/',[categoriescontroller::class, 'index'])
-        ->name('index');
-
-    Route::get('/create', [categoriescontroller::class, 'create'])
-        ->name('create');
-    
-    Route::post('/', [categoriescontroller::class, 'store'])
-        ->name('store');
-        Route::get('/{category}/edit', 'edit')->name('edit');
-        Route::put('/{category}', 'update')->name('update');
-        Route::delete('/{category}', 'destroy')->name('destroy');
+    Route::get('/','index')->name('index');
+    Route::get('/create',  'create')->name('create');
+    Route::post('/', 'store')->name('store');
+    Route::get('/{category}/edit', 'edit')->name('edit');
+    Route::put('/{category}', 'update')->name('update');
+    Route::delete('/{category}', 'destroy')->name('destroy');
 
 });
 
