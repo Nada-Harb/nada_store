@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Dashboard\CategoriesController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,27 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/pages/{name}', [HomeController::class, 'show'])->name('pages');
 
-//Route::view('/styles', 'front.pages.styles');
-
-Route::get('/pages/{name}',[HomeController::class, 'show'])->name('pages');
-
-//Route::view('/dashboard','layout.dashboard');
-
+// Categories CRUD
 Route::group([
     'prefix' => '/dashboard/categories',
-    'as' => 'dashboard.categories',
-    'controller' => CategoriesController::class, //laravel 9
-], function(){
-
-    Route::get('/','index')->name('index');
-    Route::get('/create',  'create')->name('create');
+    'as' => 'dashboard.categories.',
+    'controller' => CategoriesController::class,
+], function() {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
     Route::post('/', 'store')->name('store');
     Route::get('/{category}/edit', 'edit')->name('edit');
     Route::put('/{category}', 'update')->name('update');
     Route::delete('/{category}', 'destroy')->name('destroy');
-
 });
-
-
