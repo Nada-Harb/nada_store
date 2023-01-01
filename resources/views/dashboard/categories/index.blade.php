@@ -4,11 +4,7 @@
 
 @section('content')
 
-@if($status)
-<div class="alert alert-success">
-    {{$status}}
-</div>
-@endif
+
 
 <div class="mb-4">
     <a href="{{ route('dashboard.categories.create')}}" class="btn btn-outline-primary">
@@ -38,7 +34,7 @@
         <td>{{$category->created_at}}</td>
         <td>{{$category->updated_at ?? 'No updates'}}</td>
         <td>
-            <a href="{{ rout('dashboard.categories.edit', $category->id) }}" class="bt btn-sm btn-outline-primary">
+            <a href="{{ route('dashboard.categories.edit', $category->id) }}" class="bt btn-sm btn-outline-primary">
             <i class="fas fa-edit"></i> Edit </a> </td>
         <td>
             <form action="{{ route('dashboard.categories.destroy', $category->id) }}" method="post">

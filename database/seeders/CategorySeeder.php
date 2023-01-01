@@ -22,7 +22,7 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             'name' => 'TV & Audios',
             'slug' => 'tv-audios',
-            'created_at' => now(),
+            'created_at' => now()//لتحديد الوقت والتاريخ تلقائي function now
         ]);
 
         DB::table('categories')->insert([
