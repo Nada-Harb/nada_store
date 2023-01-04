@@ -10,38 +10,32 @@
     @endif
 
     @csrf
-    <div class="mb-3">
-        <label form="name" class="form-label">Category Name</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name', $category->name) }}">
-        @error('name')
-        <p class="invalid-feedback">{{ $message }}</p>
-        @enderror
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="mb-3">
+        <x-form.input placeholder="Name..." class="form-control-lg" id="name" name="name" label="Category Name" :value="$category->name" />
+        </div>
+
+            <div class="mb-3">
+                <x-form.input id="slug" name="slug" label="URL Slug" :value="$category->slug" />
+            </div>
+
+            <div class="mb-3">
+                <x-form.select name="parent_id" id="parent_id" label="Parent" :value="$category->parent_id" :options="$parents" />
+            </div>
+
+            <div class="mb-3">
+                <x-form.input type="file" id="image" name="image" label="Image" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+        <div class="col-md-4">
+            <a href="{{$category->image_url}}">
+            <img class="img-fluid" src="{{ $category->image_url }}" alt="">
+            </a>
+        </div>
+
     </div>
-    <div class="mb-3">
-        <label form="slug" class="form-label">URL slug</label>
-        <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" value="{{ old('slug', $category->slug) }}">
-        @error('slug')
-        <p class="invalid-feedback">{{ $message }}</p>
-        @enderror
-    </div>
-    <div class="mb-3">
-        <label form="parent_id" class="form-label"> Category Parent </label>
-        <select name="parent_id" id="parent_id" class="form-control @error('parent_id') is-invalid @enderror">
-            <option value="">No Parent</option>
-            @foreach($parents as $parent)
-            <option value="{{ $parent->id }}"> @selected( $parent->id == old('parent_id', $category->parent_id))>{{ $parent->name }}</option>
-            
-            @endforeach
-        </select>
-        @error('parent_id')
-        <p class="invalid-feedback">{{ $message }}</p>
-        @enderror
-    </div>
-    <div class="mb-3">
-        <label form="image" class="form-label">Image</label>
-        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image">
-        @error('image')
-        <p class="invalid-feedback">{{ $message }}</p>
-        @enderror
-    </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    

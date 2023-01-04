@@ -27,7 +27,14 @@ Route::group([
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::post('/', 'store')->name('store');
+
     Route::get('/{category}/edit', 'edit')->name('edit');
     Route::put('/{category}', 'update')->name('update');
     Route::delete('/{category}', 'destroy')->name('destroy');
+
+    Route::get('/trash', 'trash')->name('trash');
+    Route::patch('/{category}/restore', 'restore')->name('restore');
+    Route::delete('/{category}/force', 'forceDelete')->name('force-delete');
+
+
 });

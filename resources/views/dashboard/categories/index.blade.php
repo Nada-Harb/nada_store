@@ -4,17 +4,26 @@
 
 @section('content')
 
+<x-flash-massage />
 
+
+<x-alert type="success">
+    <h4>Alert Title</h4>
+    <p>Alert Massage</p>
+</x-alert>
 
 <div class="mb-4">
     <a href="{{ route('dashboard.categories.create')}}" class="btn btn-outline-primary">
         <i class="fas fa-plus"></i> Add New</a>
+    <a href="{{ route('dashboard.categories.trash')}}" class="btn btn-outline-dark">
+        <i class="fas fa-trash"></i> View Trash</a>
+
 </div>
 
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
+            <th></th>
             <th>Name</th>
             <th>Parent ID</th>
             <th>Created At</th>
@@ -27,7 +36,7 @@
 <tbody>
     @foreach($categories as $category)
     <tr>
-        <td>{{$category->id}}</td>
+        <td><img class="img-fluid" src="{{ $category->image_url }}" width="80" alt=""></td>
         <td><strong>{{$category->name}}</strong><br>
         <span class="text-muted">{{$category->slug}}</span></td>
         <td>{{$category->parent_name}}</td>

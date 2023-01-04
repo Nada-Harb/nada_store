@@ -35,7 +35,7 @@ class CategoryRequest extends FormRequest
                     'image',
                     'max:200',
                     
-                    Rule::dimensions()->minHeight(300)->maxHeight(1200)->minWidth(300)->maxWidth(1200),
+                    Rule::dimensions()->minHeight(300)->maxHeight(1600)->minWidth(300)->maxWidth(1600),
                     ]
                 
             
