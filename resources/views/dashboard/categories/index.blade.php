@@ -6,7 +6,7 @@
 
 <x-flash-massage />
 
-
+<x-alert type="info" />
 <x-alert type="success">
     <h4>Alert Title</h4>
     <p>Alert Massage</p>
@@ -19,6 +19,19 @@
         <i class="fas fa-trash"></i> View Trash</a>
 
 </div>
+<form action="{{ URL::current() }}" method="get" class="d-flex mb-5">
+    <div class="">
+        <x-form.input name="search" id="search" :value="request('search')" />
+    </div>
+
+    <div class="">
+        <x-form.select name="p" id="p" :value="request('p')" :options="$parents"  />
+    </div>
+
+    <div class="ml-2">
+        <button type="submit" class="btn btn-dark">Find</button>
+    </div>
+</form>
 
 <table class="table">
     <thead>

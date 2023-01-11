@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\CategoriesController;
+use App\Http\Controllers\Dashboard\ProductsController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,4 +38,13 @@ Route::group([
     Route::delete('/{category}/force', 'forceDelete')->name('force-delete');
 
 
+});
+
+Route::group([
+    'prefix' => '/dashboard',
+    'as' => 'dashboard.'
+], function() {
+    Route::resource('products', ProductsController::class)->names([
+        'index' => 'list'
+    ]);
 });

@@ -13,22 +13,27 @@ use Illuminate\Support\Str;
 
 class CategoriesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // SQL:
         // SELECT categories.*, parents.name as parent_name FROM categories
         // LEFT JOIN categories as parents ON parents.id = categories.parent_id
-        
-        // Return Collection object (array)
+        // 
         $categories = Category::select([
                 'categories.*',
                 'parents.name as parent_name',
             ])
             ->leftJoin('categories as parents', 'parents.id', '=', 'categories.parent_id')
+            //->noParent()
+            ->search($request->query('search'))
             ->get();
+
+        $parents = Category::pluck('name', 'id');
+        //dd($categories);
 
         return view('dashboard.categories.index', [
             'categories' => $categories,
+            'parents' => $parents, 
         ]);
     }
 
@@ -120,9 +125,6 @@ class CategoriesController extends Controller
         //Category::destroy($id);
         $category = Category::findOrFail($id);
         $category->delete();
-        // if ($category->image_path) {
-        //     Storage::disk('public')->delete($category->image_path);
-        // }
 
         return redirect()
             ->route('dashboard.categories.index')
@@ -140,7 +142,7 @@ class CategoriesController extends Controller
                 'image',
                 'max:100',
                 //'dimensions:min_width=300,min_height=300,max_width=1200,max_height=1200',
-                Rule::dimensions()->minHeight(300)->maxHeight(1600)->minWidth(300)->maxWidth(1600),
+                Rule::dimensions()->minHeight(300)->maxHeight(1200)->minWidth(300)->maxWidth(1200),
             ],
         ];
 
@@ -180,5 +182,4 @@ class CategoriesController extends Controller
         return redirect()->route('dashboard.categories.trash')
             ->with('success', "Category {$category->name} deleted forever!");
     }
-
 }
